@@ -1,25 +1,25 @@
-# automatize — hot tours → VK publisher
+# automatize — горящие туры → публикация в VK
 
-TypeScript/Express backend that fetches (or mocks) tour deals, validates filters with Zod, formats posts, and publishes them to a VK community wall.
+Backend на TypeScript/Express: забирает (или мокает) подборки туров, валидирует фильтры через Zod, форматирует посты и публикует их на стену сообщества VK.
 
-Useful as a small **automation / integrations** portfolio piece next to the larger TravelHub stack.
+Небольшой, но цельный кейс по **автоматизации и интеграциям** рядом с экосистемой TravelHub.
 
-## Features
+## Возможности
 
-- `GET /health` — liveness
-- `GET /tours` — list/filter tours (`minPrice`, `maxPrice`, `country`, `city`)
-- Publish flow → VK `wall.post`
-- Auth header modes for upstream tour APIs: `bearer` | `token` | `x-api-key` | `raw`
-- Mock tours fallback when the upstream API is empty/unavailable
-- Request logging + centralized error handler
+- `GET /health` — проверка живости сервиса
+- `GET /tours` — список/фильтр туров (`minPrice`, `maxPrice`, `country`, `city`)
+- Публикация в VK через `wall.post`
+- Режимы токена для upstream API туров: `bearer` | `token` | `x-api-key` | `raw`
+- Fallback на mock-туры, если внешний API пустой/недоступен
+- Логирование запросов и общий error handler
 
-## Stack
+## Стек
 
 - Node.js 18+
 - Express + TypeScript
 - Axios · Zod · dotenv · CORS
 
-## Quick start
+## Быстрый старт
 
 ```bash
 cp .env.example .env
@@ -32,32 +32,32 @@ curl http://localhost:3000/health
 curl "http://localhost:3000/tours?maxPrice=80000&country=Turkey"
 ```
 
-## Environment
+## Переменные окружения
 
-| Variable | Purpose |
-|----------|---------|
-| `PORT` | Server port (default `3000`) |
-| `TOUR_API_URL` | Upstream tours API |
-| `TOUR_API_TOKEN` | Optional API token |
+| Переменная | Назначение |
+|------------|------------|
+| `PORT` | Порт сервера (по умолчанию `3000`) |
+| `TOUR_API_URL` | Upstream API туров |
+| `TOUR_API_TOKEN` | Опциональный токен API |
 | `TOUR_API_TOKEN_MODE` | `bearer` / `token` / `x-api-key` / `raw` |
-| `VK_TOKEN` | VK access token |
-| `VK_GROUP_ID` | Group id (e.g. `-123456789`) |
+| `VK_TOKEN` | Access token VK |
+| `VK_GROUP_ID` | ID группы (например `-123456789`) |
 
-Never commit `.env`.
+Файл `.env` в git не коммитить.
 
-## Project layout
+## Структура
 
 ```text
 src/
-  index.ts                 # app bootstrap
+  index.ts                 # точка входа
   routes/                  # /tours, publish
   controllers/
   services/                # tourService, vkService
-  validation/              # Zod schemas
+  validation/              # Zod-схемы
   data/mockTours.ts
 ```
 
-## Scripts
+## Скрипты
 
 ```bash
 npm run dev      # ts-node-dev
@@ -65,6 +65,10 @@ npm run build    # tsc → dist/
 npm start        # node dist/index.js
 ```
 
-## Related
+## Связанные репозитории
 
-Part of the TravelHub ecosystem: [`travelhub-v2`](https://github.com/s1kata/travelhub-v2) · [`app`](https://github.com/s1kata/app) · [`microservice`](https://github.com/s1kata/microservice)
+Экосистема TravelHub: [`travelhub-v2`](https://github.com/s1kata/travelhub-v2) · [`app`](https://github.com/s1kata/app) · [`microservice`](https://github.com/s1kata/microservice)
+
+## Автор
+
+Ильяс ([s1kata](https://github.com/s1kata)) · fullstack / backend
